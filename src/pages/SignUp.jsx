@@ -56,6 +56,7 @@ const SignUp = () => {
       password: false,
       confirmPassword: false,
     });
+
     return true;
   };
 
@@ -66,7 +67,7 @@ const SignUp = () => {
 
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/v1/registration`,
+        `${process.env.REACT_APP_API_URL}/users/register`,
         {
           email: form.email,
           password: form.confirmPassword,
@@ -84,11 +85,13 @@ const SignUp = () => {
       localStorage.removeItem("user");
       navigate("/donate");
     } catch (error) {
-      console.error(error);
+      console.error("Registration error:", error.response || error);
 
       MySwal.fire({
         title: "Request Failed!",
-        text: "Check your credentials and internet connection, then try again.",
+        text:
+          error.response?.data?.message ||
+          "Check your credentials and internet connection, then try again.",
         icon: "error",
       });
     }
