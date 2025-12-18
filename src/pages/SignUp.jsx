@@ -46,12 +46,11 @@ const SignUp = () => {
     const handleSubmit = async(event) => {
         event.preventDefault();
         if (validateForm()) {
-            var options = {
-                method: 'POST',
-                url: 'http://localhost:5000/api/v1/registration',
-                data: { email: form.email, password: form.confirmPassword },
-            };
-
+            axios({
+  method: "POST",
+  url: `${process.env.REACT_APP_API_URL}/api/v1/registration`,
+  data: formData
+});
             await axios.request(options)
                 .then(response => {
                     console.log("Token: ", response.data);
