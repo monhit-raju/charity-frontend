@@ -67,12 +67,13 @@ const SignUp = () => {
 
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/users/register`,
-        {
-          email: form.email,
-          password: form.confirmPassword,
-        }
-      );
+  `${import.meta.env.VITE_API_URL}/users/register`,
+  {
+    email: form.email,
+    password: form.confirmPassword,
+  }
+);
+
 
       console.log("Response:", response.data);
 
